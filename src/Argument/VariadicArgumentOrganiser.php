@@ -22,22 +22,10 @@ use ReflectionFunctionAbstract;
  */
 final class VariadicArgumentOrganiser implements ArgumentOrganiser
 {
-    /**
-     * @var ArgumentOrganiser
-     */
-    private $decoratedArgumentOrganiser;
-
-    /**
-     * @param ArgumentOrganiser $decoratedArgumentOrganiser
-     */
-    public function __construct(ArgumentOrganiser $decoratedArgumentOrganiser)
+    public function __construct(private ArgumentOrganiser $decoratedArgumentOrganiser)
     {
-        $this->decoratedArgumentOrganiser = $decoratedArgumentOrganiser;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function organiseArguments(ReflectionFunctionAbstract $function, array $arguments): array
     {
         $organisedArguments = $this->decoratedArgumentOrganiser->organiseArguments($function, $arguments);

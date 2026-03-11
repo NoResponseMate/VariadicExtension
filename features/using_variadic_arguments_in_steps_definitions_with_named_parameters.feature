@@ -15,21 +15,18 @@ Feature: Using variadic arguments in steps definitions with named parameters
         <?php
 
         use Behat\Behat\Context\Context;
+        use Behat\Step\When;
 
         class FeatureContext implements Context
         {
-            /**
-             * @When I pass :firstArgument and :secondArgument as arguments
-             * @When I pass :firstArgument, :secondArgument and :thirdArgument as arguments
-             */
+            #[When('I pass :firstArgument and :secondArgument as arguments')]
+            #[When('I pass :firstArgument, :secondArgument and :thirdArgument as arguments')]
             public function iPass(...$arguments)
             {
                 printf('Number of passed arguments: %d', count($arguments));
             }
 
-            /**
-             * @When I pass :firstArgument and :secondArgument as arguments to :subject
-             */
+            #[When('I pass :firstArgument and :secondArgument as arguments to :subject')]
             public function iPassToSubject($subject, ...$arguments)
             {
                 printf('Number of arguments passed to %s: %d', $subject, count($arguments));

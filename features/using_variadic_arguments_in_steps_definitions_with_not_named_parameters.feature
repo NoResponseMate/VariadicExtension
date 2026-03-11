@@ -15,13 +15,12 @@ Feature: Using variadic arguments in Behat steps definitions with not named para
         <?php
 
         use Behat\Behat\Context\Context;
+        use Behat\Step\When;
 
         class FeatureContext implements Context
         {
-            /**
-             * @When /^I pass "(\w+)" and "(\w+)" as arguments$/
-             * @When /^I pass "(\w+)", "(\w+)" and "(\w+)" as arguments$/
-             */
+            #[When('/^I pass "(\w+)" and "(\w+)" as arguments$/')]
+            #[When('/^I pass "(\w+)", "(\w+)" and "(\w+)" as arguments$/')]
             public function iPass(...$arguments)
             {
                 printf('Number of passed arguments: %d', count($arguments));

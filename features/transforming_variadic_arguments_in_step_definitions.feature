@@ -15,21 +15,20 @@ Feature: Transforming variadic arguments in step definitions
         <?php
 
         use Behat\Behat\Context\Context;
+        use Behat\Hook\BeforeScenario;
+        use Behat\Step\When;
+        use Behat\Transformation\Transform;
 
         class FeatureContext implements Context
         {
-            /**
-             * @Transform /^(\w+)$/
-             */
+            #[Transform('/^(\w+)$/')]
             public function transform($string)
             {
                 return strtoupper($string);
             }
 
-            /**
-             * @When /^I pass "(\w+)" and "(\w+)" as arguments$/
-             * @When I pass :firstArgument, :secondArgument and :thirdArgument
-             */
+            #[When('/^I pass "(\w+)" and "(\w+)" as arguments$/')]
+            #[When('I pass :firstArgument, :secondArgument and :thirdArgument')]
             public function iPass(...$arguments)
             {
                 printf('Arguments: %s', join(', ', $arguments));
